@@ -18,25 +18,23 @@ object GrepBenchmark {
 
 		val (host, port, instance, batchDuration, regular) = (args(0), args(1).toInt, args(2).toInt, args(3).toInt, args(4))
 
-		val conf = new SparkConf().setAppName("streaming-benchmark")
-		val ssc = new StreamingContext(conf, Seconds(batchDuration))
-		val lines = ssc.socketTextStream(host, port, StorageLevel.MEMORY_AND_DISK_SER)
-		val words = lines.flatMap(_.split(" "))
-		val wordCount = words.map(x => (x, 1)).reduceByKey(_ + _)
-
 		val regex = new Regex(regular)
 
 		def regexFunc(sourceString: String): Boolean = {
-//			sourceString match {
-//				case Some(regex(_*)) => true
-//				case _ => false
-//			}
+			//			sourceString match {
+			//				case Some(regex(_*)) => true
+			//				case _ => false
+			//			}
 			(regex findFirstMatchIn sourceString).nonEmpty
 		}
 
-		val filterResult = wordCount.filter(x => regexFunc(x._1))
-		val result = filterResult.map(x => (x._2, x._1))
-		result.print()
+		val conf = new SparkConf().setAppName("streaming-benchmark-GrepBenchmark")
+		val ssc = new StreamingContext(conf, Seconds(batchDuration))
+		val lines = ssc.socketTextStream(host, port, StorageLevel.MEMORY_AND_DISK_SER)
+		val words = lines.flatMap(_.split(" ")).filter(x => regexFunc(x))
+		val wordCount = words.map(x => (x, 1)).reduceByKey(_ + _)
+
+		wordCount.print()
 		ssc.start()
 		ssc.awaitTermination()
 	}

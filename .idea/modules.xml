@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/sparkStreaming/sparkStreaming.iml" filepath="$PROJECT_DIR$/sparkStreaming/sparkStreaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/storm/storm.iml" filepath="$PROJECT_DIR$/storm/storm.iml" />
       <module fileurl="file://$PROJECT_DIR$/streamingPlantformBenchmark.iml" filepath="$PROJECT_DIR$/streamingPlantformBenchmark.iml" />
     </modules>
   </component>

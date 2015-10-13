@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="scala-library">
+  <library name="storm-kafka-0.9.5">
     <CLASSES>
-      <root url="jar://D:/scala/lib/scala-library.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../storm-kafka-0.9.5.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
